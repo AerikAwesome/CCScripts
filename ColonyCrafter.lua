@@ -403,7 +403,7 @@ while true do
         if now >= 5 and now < 19.5 then
             current_run = current_run - 1
             if current_run <= 0 then
-                scanWorkRequests(monitor, bridge, storage)
+                scanWorkRequests(monitor, bridge, storage.name)
                 current_run = time_between_runs
             end
         end
@@ -411,7 +411,7 @@ while true do
         TIMER = os.startTimer(1)
     elseif e[1] == "monitor_touch" then
         os.cancelTimer(TIMER)
-        scanWorkRequests(monitor, bridge, storage)
+        scanWorkRequests(monitor, bridge, storage.name)
         current_run = time_between_runs
         displayTimer(monitor, current_run)
         TIMER = os.startTimer(1)
