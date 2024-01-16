@@ -56,7 +56,7 @@ print("Colony Integrator initialized.")
 -- Point to location of chest or storage container
 -- A future update may autodetect where the storage container is and error
 -- out if no storage container is found.
-local storage = peripheral.find("inventory")
+local storage = peripheral.getName(peripheral.find("inventory"))
 print("Storage initialized.")
 
 -- Name of log file to capture JSON data from the open requests.  The log can
@@ -403,7 +403,7 @@ while true do
         if now >= 5 and now < 19.5 then
             current_run = current_run - 1
             if current_run <= 0 then
-                scanWorkRequests(monitor, bridge, peripheral.getName(storage))
+                scanWorkRequests(monitor, bridge, storage)
                 current_run = time_between_runs
             end
         end
@@ -411,7 +411,7 @@ while true do
         TIMER = os.startTimer(1)
     elseif e[1] == "monitor_touch" then
         os.cancelTimer(TIMER)
-        scanWorkRequests(monitor, bridge, peripheral.getName(storage))
+        scanWorkRequests(monitor, bridge, storage)
         current_run = time_between_runs
         displayTimer(monitor, current_run)
         TIMER = os.startTimer(1)
