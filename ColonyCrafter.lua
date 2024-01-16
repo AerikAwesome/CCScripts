@@ -60,6 +60,7 @@ local storagePeripheral = peripheral.find("inventory")
 if not storagePeripheral then error("Storage not found.") end
 local storage = peripheral.getName(storagePeripheral)
 print("Storage initialized.")
+print(storage)
 
 -- Name of log file to capture JSON data from the open requests.  The log can
 -- be too big to edit within CC, which may require a "pastebin put" if you want
