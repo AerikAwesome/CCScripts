@@ -58,7 +58,7 @@ print("Colony Integrator initialized.")
 -- out if no storage container is found.
 local storagePeripheral = peripheral.find("inventory")
 if not storagePeripheral then error("Storage not found.") end
-local storage = storagePeripheral.getName()
+local storage = peripheral.getName(storagePeripheral)
 print("Storage initialized.")
 
 -- Name of log file to capture JSON data from the open requests.  The log can
