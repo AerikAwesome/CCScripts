@@ -56,7 +56,9 @@ print("Colony Integrator initialized.")
 -- Point to location of chest or storage container
 -- A future update may autodetect where the storage container is and error
 -- out if no storage container is found.
-local storage = peripheral.getName(peripheral.find("inventory"))
+local storagePeripheral = peripheral.find("inventory")
+if not storagePeripheral then error("Storage not found.") end
+local storage = storagePeripheral.getName()
 print("Storage initialized.")
 
 -- Name of log file to capture JSON data from the open requests.  The log can
