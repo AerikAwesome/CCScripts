@@ -23,7 +23,7 @@ function writeStockToFile()
 end
 
 function getStockFromRS()
-    local items = rs.listItems()
+    local items = bridge.listItems()
     for index, item in ipairs(items) do
         if item.isCraftable then
             current_stock[item.name] = item.amount
@@ -38,7 +38,7 @@ function checkStock()
         local currentAmount = current_stock[name].amount
         print("Item: "..name.." Wanted: "..wantedAmount.." Current: "..currentAmount)
         if currentAmount < wantedAmount then
-            rs.craftItem({name=name, count=wantedAmount-currentAmount})
+            bridge.craftItem({name=name, count=wantedAmount-currentAmount})
         end
     end
 end
