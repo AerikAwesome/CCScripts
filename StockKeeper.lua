@@ -29,6 +29,7 @@ function getStockFromRS()
             current_stock[item.name] = item.amount
         end
     end
+    print("Found "..#current_stock.." craftable items")
 end
 
 function checkStock()
@@ -44,8 +45,10 @@ function checkStock()
 end
 
 function addBricks()
-    if stock_list.length == 0 then
-        brick = {name="minecraft:stone_bricks", amount=64}
+    print("Adding bricks if missing")
+    local brickName = "minecraft:stone_bricks"
+    if not stock_list[brickName] then
+        local brick = {name=brickName, amount=64}
         table.insert(stock_list, brick)
     end
 end
