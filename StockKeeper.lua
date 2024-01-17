@@ -24,6 +24,7 @@ end
 
 function getStockFromRS()
     local items = bridge.listItems()
+    print("Found "..#items.." items in RS system")
     for index, item in ipairs(items) do
         if item.isCraftable then
             current_stock[item.name] = item.amount
