@@ -24,7 +24,7 @@ end
 
 function getStockFromRS()
     local items = bridge.listCraftableItems()
-    for index, item in ipairs(items) do
+    for item in pairs(items) do
         current_stock[item.name] = item.amount
     end
     print("Found "..#current_stock.." craftable items")
@@ -59,7 +59,7 @@ function work()
     writeStockToFile()
 end
 
-
+work()
 local delay = 10
 local TIMER = os.startTimer(delay)
 while true do
