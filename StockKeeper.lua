@@ -7,12 +7,13 @@ local stock_list = {}
 local current_stock = {}
 
 function getStockFromFile()
-    if !fs.exists(stockFile) then
+    if not fs.exists(stockFile) then
         fs.create(stockFile)
+    else
+        local file = fs.open(stockFile, "r")
+        stock_list = textutils.unserialise(file.readAll())
+        file.close()
     end
-    local file = fs.open(stockFile, "r")
-    stock_list = textutils.unserialise(file.readAll())
-    file.close()
 end
 
 function writeStockToFile()
