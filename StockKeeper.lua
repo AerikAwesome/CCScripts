@@ -24,7 +24,8 @@ end
 
 function getStockFromRS()
     local items = bridge.listCraftableItems()
-    for item in pairs(items) do
+    for itemIndex in pairs(items) do
+        local item = items[itemIndex]
         current_stock[item.name] = item.amount
     end
     print("Found "..#current_stock.." craftable items")
