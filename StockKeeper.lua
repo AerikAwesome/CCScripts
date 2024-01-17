@@ -45,9 +45,9 @@ function checkStock()
 end
 
 function addBricks()
-    print("Adding bricks if missing")
+    print("Adding bricks if no items")
     local brickName = "minecraft:stone_bricks"
-    if not stock_list[brickName] then
+    if #stock_list == 0 then
         local brick = {name=brickName, amount=64}
         table.insert(stock_list, brick)
     end
