@@ -7,9 +7,8 @@ local stock_list = {}
 local current_stock = {}
 
 function getStockFromFile()
-    if not fs.exists(stockFile) then
-        fs.create(stockFile)
-    else
+    print("Getting stock config from file")
+    if fs.exists(stockFile) then
         local file = fs.open(stockFile, "r")
         stock_list = textutils.unserialise(file.readAll())
         file.close()
@@ -17,6 +16,7 @@ function getStockFromFile()
 end
 
 function writeStockToFile()
+    print("Writing stock config to file")
     local file = fs.open(stockFile, "w")
     file.write(textutils.serialise(stock_list))
     file.close()
@@ -36,6 +36,7 @@ function checkStock()
         local name = stock_list[s].name
         local wantedAmount = stock_list[s].amount
         local currentAmount = current_stock[name].amount
+        print("Item: "..name.." Wanted: "..wantedAmount.." Current: "..currentAmount)
         if currentAmount < wantedAmount then
             rs.craftItem({name=name, count=wantedAmount-currentAmount})
         end
