@@ -25,14 +25,10 @@ end
 function getStockFromRS()
     local items = bridge.listCraftableItems()
     print("Retrieved "..#items.." craftable items from RS")
-    prtTable(current_stock, "empty: ")
     for itemIndex in pairs(items) do
         local item = items[itemIndex]
-        --print ("Adding item "..item.name.." to list")
         current_stock[item.name] = item.amount
     end
-    prtTable(current_stock, "stock: ")
-    print("Found "..#current_stock.." craftable items")
 end
 
 function checkStock()
@@ -50,7 +46,7 @@ end
 function addBricks()
     print("Adding bricks if no items")
     local brickName = "minecraft:stone_bricks"
-    if #stock_list == 0 then
+    if not stock_list[brickName] then
         local brick = {name=brickName, amount=64}
         table.insert(stock_list, brick)
     end
