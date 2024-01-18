@@ -35,12 +35,11 @@ function checkStock()
     for s in pairs(stock_list) do
         local name = stock_list[s].name
         local wantedAmount = stock_list[s].amount
-        local current_item = current_stock[name]
-        if current_item then
-            local currentAmount = current_item.amount
-            print("Item: "..name.." Wanted: "..wantedAmount.." Current: "..currentAmount)
-            if currentAmount < wantedAmount then
-                bridge.craftItem({name=name, count=wantedAmount-currentAmount})
+        local current_amount = current_stock[name]
+        if current_amount then
+            print("Item: "..name.." Wanted: "..wantedAmount.." Current: "..current_amount)
+            if current_amount < wantedAmount then
+                bridge.craftItem({name=name, count=wantedAmount-current_amount})
             end
         else
             print("Item "..name.." not found in craftable items")
