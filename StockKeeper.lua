@@ -39,7 +39,9 @@ function checkStock()
         if current_amount then
             print("Item: "..name.." Wanted: "..wantedAmount.." Current: "..current_amount)
             if current_amount < wantedAmount then
-                bridge.craftItem({name=name, count=wantedAmount-current_amount})
+                local amountToCraft = wantedAmount-current_amount
+                print("Crafting "..amountToCraft.." of material "..name)
+                bridge.craftItem({name=name, count=amountToCraft})
             end
         else
             print("Item "..name.." not found in craftable items")
