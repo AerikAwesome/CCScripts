@@ -25,11 +25,13 @@ end
 function getStockFromRS()
     local items = bridge.listCraftableItems()
     print("Retrieved "..#items.." craftable items from RS")
+    prtTable(current_stock, "empty: ")
     for itemIndex in pairs(items) do
         local item = items[itemIndex]
-        print ("Adding item "..item.name.." to list")
+        --print ("Adding item "..item.name.." to list")
         current_stock[item.name] = item.amount
     end
+    prtTable(current_stock, "stock: ")
     print("Found "..#current_stock.." craftable items")
 end
 
@@ -51,6 +53,32 @@ function addBricks()
     if #stock_list == 0 then
         local brick = {name=brickName, amount=64}
         table.insert(stock_list, brick)
+    end
+end
+
+--Print tables
+function prtTable(tbl, prefix)
+    prefix = prefix or ""
+    
+    for k, v in pairs(tbl) do
+        print(prefix .. "k: " .. tostring(k) .. "; v: " .. tostring(v))
+
+        if type(v) == "table" then
+            prtTable(v, prefix .. "-") --add a dash for every level of recursion so we get a nice tree structure for nested tables
+        end    
+    end
+end
+
+--like prtTable but keeps the order of the table intact (cannot be used for associative arrays!)
+function prtITable(tbl, prefix)
+    prefix = prefix or ""
+    
+    for k, v in ipairs(tbl) do
+        print(prefix .. "k: " .. tostring(k) .. "; v: " .. tostring(v))
+
+        if type(v) == "table" then
+            prtTable(v, prefix .. "-") --add a dash for every level of recursion so we get a nice tree structure for nested tables
+        end    
     end
 end
 
