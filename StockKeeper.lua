@@ -2,7 +2,7 @@ local bridge = peripheral.find("rsBridge")
 if not bridge then error("RS Bridge not found.") end
 print("RS Bridge initialized.")
 
-local stockFile = "stock.csv"
+local stockFile = "stock.json"
 local stock_list = {}
 local current_stock = {}
 
@@ -49,45 +49,33 @@ function checkStock()
     end
 end
 
-function addBricks()
-    print("Adding bricks if no items")
-    local brickName = "minecraft:stone_bricks"
-    if not stock_list[brickName] then
-        local brick = {name=brickName, amount=64}
-        table.insert(stock_list, brick)
-    end
-end
-
 --Print tables
 function prtTable(tbl, prefix)
     prefix = prefix or ""
-    
     for k, v in pairs(tbl) do
         print(prefix .. "k: " .. tostring(k) .. "; v: " .. tostring(v))
 
         if type(v) == "table" then
             prtTable(v, prefix .. "-") --add a dash for every level of recursion so we get a nice tree structure for nested tables
-        end    
+        end
     end
 end
 
 --like prtTable but keeps the order of the table intact (cannot be used for associative arrays!)
 function prtITable(tbl, prefix)
     prefix = prefix or ""
-    
     for k, v in ipairs(tbl) do
         print(prefix .. "k: " .. tostring(k) .. "; v: " .. tostring(v))
 
         if type(v) == "table" then
             prtTable(v, prefix .. "-") --add a dash for every level of recursion so we get a nice tree structure for nested tables
-        end    
+        end
     end
 end
 
 function work()
     getStockFromFile()
     getStockFromRS()
-    addBricks()
     checkStock()
     writeStockToFile()
 end
