@@ -23,11 +23,18 @@ function writeStockToFile()
 end
 
 function getStockFromRS()
-    local items = bridge.listCraftableItems()
-    print("Retrieved "..#items.." craftable items from RS")
+    local craftableItems = bridge.listCraftableItems()
+    local items = bridge.listItems()
+    print("Retrieved "..#craftableitems.." craftable items from RS")
+    for itemIndex in pairs(craftableItems) do
+        local item = craftableItems[itemIndex]
+        current_stock[item.name] = 0
+    end
     for itemIndex in pairs(items) do
         local item = items[itemIndex]
-        current_stock[item.name] = item.amount
+        if current_stock[item.name] then
+            current_stock[item.name] = item.amount
+        end
     end
 end
 
