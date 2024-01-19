@@ -2,6 +2,12 @@ local bridge = peripheral.find("rsBridge")
 if not bridge then error("RS Bridge not found.") end
 print("RS Bridge initialized.")
 
+local monitor = peripheral.find("monitor")
+if monitor then
+    monitor.setTextScale(0.5)
+    term.redirect(monitor)
+end
+
 local stockFile = "stock.json"
 local stock_list = {}
 local current_stock = {}
